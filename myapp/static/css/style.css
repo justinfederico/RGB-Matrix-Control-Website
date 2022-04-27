@@ -1,0 +1,134 @@
+@import url(https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css);
+@import url(https://fonts.googleapis.com/css?family=Lato:300,400,700);
+*{
+    margin: 0;
+    padding: 0;
+    cursor: none;
+}
+
+html{
+    scroll-behavior: smooth;
+}
+
+body{
+    font-size: 100%;
+    font-family: sans-serif;
+    background-color: indigo;
+}
+
+div, section, span, ul, li, a, header{
+    box-sizing: border-box;
+}
+
+/*css reset*/
+
+header{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 20px 50px;
+    align-items: center;
+    position: fixed;
+    z-index: 999;
+}
+
+h1{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #fff;
+}
+
+.link {
+	font-family: "Montserrat", sans-serif;
+	text-decoration: none;
+	padding: 10px 30px;
+	border: solid 1px #366;
+	color: #366;
+	margin: auto;
+	display: inline-block;
+	overflow: hidden;
+	position: relative;
+	transition-duration: 0.3s;
+}
+
+.link:hover {
+	color: #fff;
+	box-shadow: 0 0 6px rgba(0, 0, 0, .5);
+}
+
+.link span {
+	content: "";
+	border-radius: 50%;
+	width: 0px;
+	height: 0px;
+	transform: translate(-50%, -50%);
+	transition: height 0.5s ease-in-out, width 0.5s ease-in-out, opacity 0.1s;
+	background: #366;
+	position: absolute;
+	z-index: -1;
+	opacity: 0;
+}
+
+.link:hover span {
+	width: 300px;
+	height: 300px;
+	opacity: 1;
+}
+
+.mouse {
+	border: solid 2px #eda135;
+	width: 20px;
+	height: 20px;
+	border-radius: 50%;
+	position: absolute;
+	transform: translate(calc(-50% + 1px), calc(-50% + 1px));
+	transition-property: width, height;
+	transition-duration: 0.2s;
+	z-index: 999;
+	pointer-events: none;
+}
+
+.mouse::before {
+	content: "";
+	background-color: #eda135;
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%);
+	width: 2px;
+	height: 2px;
+	border-radius: 50%;
+	transition-duration: 0.3s;
+	z-index: 999;
+}
+
+.mouse-link::before {
+	width: 22px;
+	height: 22px;
+	z-index: 998;
+}
+
+.mouse::after {
+	content: "";
+	z-index: 997;
+	background: #fff;
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%);
+	width: 25px;
+	height: 25px;
+	border-radius: 50%;
+	opacity: 0;
+}
+
+.mouse-clicked::after {
+	animation-name: click;
+	animation-duration: 0.7s;
+	animation-fill-mode: forward;
+	animation-timing-function: cubic-bezier(0.22, 0.69, 0.31, 0.77);
+}
+
+
