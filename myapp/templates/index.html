@@ -2,19 +2,25 @@
 <html lang="en">
 
 <head>
+    <!--- Include Jquery stuff so form can be submitted without reloading page --->
+    <script src="https://code.jquery.com/jquery-3.5.1.js"
+                          integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
+                          crossorigin="anonymous"></script>
     <meta charset="UTF-8">
-    <title>MQTT Matrix</title>
+    <title>MQTT PiMatrix</title>
+    <!--- Reference correct stylesheet --->
     <link rel="stylesheet" type="text/css" href="../static/css/style.css">
 </head>
 <body>
 
 
         <header>
+            <!--- Website header --->
             <h1>Enter a link to display.</h1>
         </header>
 
         <div class="container">
-
+            <!--- Container for submitting images to Raspberry Pi --->
             <div class="container" id="submission-box">
                     <form method="post" class="form" id="image-form">
                         <label>
@@ -22,35 +28,50 @@
                         </label>
                         <button type="submit" class="btn btn--primary btn--inside uppercase" id="button">Submit</button>
                     </form>
-                <!--Jquery Cdn -->
-                      <script src="https://code.jquery.com/jquery-3.5.1.js"
-                              integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
-                              crossorigin="anonymous"></script>
-                <script type="text/javascript">
-                    $(document).on('submit','#image-form',function(e)
-                                   {
-                      console.log('hello');
-                      e.preventDefault();
-                      $.ajax({
-                        type:'POST',
-                        url:'/',
-                        data:{
-                          image:$("#image").val()
-                        },
-                        success:function()
-                        {
-                          alert('Submitted to Raspberry Pi!');
-                        }
-                      })
-                    });
-                  </script>
+                <!--Script for submission without reload -->
+
+                        <script type="text/javascript">
+                            $(document).on('submit','#image-form',function(e)
+                                           {
+                              console.log('Clicked!');
+                              e.preventDefault();
+                              $.ajax({
+                                type:'POST',
+                                url:'/',
+                                data:{
+                                  image:$("#image").val()
+                                },
+                                success:function()
+                                {
+                                  alert('Submitted to Raspberry Pi!');
+                                }
+                              })
+                            });
+                          </script>
                     <form method="post" class="form" id="gif-form">
                         <label>
-                            <input type="url" class="form__field" placeholder="Enter gif link..." />
+                            <input type="url" name="gif" id="gif" placeholder="Enter gif link..." />
                         </label>
                         <button type="button" class="btn btn--primary btn--inside uppercase" id="button2">Submit</button>
                     </form>
-
+                    <script type="text/javascript">
+                            $(document).on('submit','#gif-form',function(e)
+                                           {
+                              console.log('Clicked!');
+                              e.preventDefault();
+                              $.ajax({
+                                type:'POST',
+                                url:'/',
+                                data:{
+                                  gif:$("#gif").val()
+                                },
+                                success:function()
+                                {
+                                  alert('Submitted to Raspberry Pi!');
+                                }
+                              })
+                            });
+                          </script>
             </div>
         </div>
 

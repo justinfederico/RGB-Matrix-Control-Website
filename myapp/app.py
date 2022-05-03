@@ -30,10 +30,14 @@ def on_message(client, userdata, msg):
 @app.route("/", methods=['GET', 'POST'])
 def index():
     if request.method == "POST":
-        image = request.form.get("image")
-        imagePi = 'I:' + image
-        client.publish(topic, imagePi)
-
+        if 'button' in request.form:
+            image = request.form.get("image")
+            imagePi = 'I:' + image
+            client.publish(topic, imagePi)
+        if 'button2' in request.form:
+            gif = request.form.get("gif")
+            gifPi = 'G:' + gif
+            client.publish(topic, gifPi)
     return render_template('index.html')
 
 
