@@ -6,29 +6,53 @@
     <title>MQTT Matrix</title>
     <link rel="stylesheet" type="text/css" href="../static/css/style.css">
 </head>
-<div class="mouse"></div>
 <body>
 
 
         <header>
-            <h1>Choose what you would like the matrix to display, then click submit.</h1>
+            <h1>Enter a link to display.</h1>
         </header>
 
         <div class="container">
-  <!-- Example row of columns -->
 
-  <div class="row text-center">
-        <div class="col-12 col-md-4">
-          <button class="link">primary</button>
-        </div>
-        <div class="col-12 col-md-4">
-          <button class="link">secondary</button>
-        </div>
-        <div class="col-12 col-md-4">
-          <button class="link">light</button>
-        </div>
-      </div>
+            <div class="container" id="submission-box">
+                    <form method="post" class="form" id="image-form">
+                        <label>
+                            <input type="url" name="image" id="image" placeholder="Enter image link..." />
+                        </label>
+                        <button type="submit" class="btn btn--primary btn--inside uppercase" id="button">Submit</button>
+                    </form>
+                <!--Jquery Cdn -->
+                      <script src="https://code.jquery.com/jquery-3.5.1.js"
+                              integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
+                              crossorigin="anonymous"></script>
+                <script type="text/javascript">
+                    $(document).on('submit','#image-form',function(e)
+                                   {
+                      console.log('hello');
+                      e.preventDefault();
+                      $.ajax({
+                        type:'POST',
+                        url:'/',
+                        data:{
+                          image:$("#image").val()
+                        },
+                        success:function()
+                        {
+                          alert('Submitted to Raspberry Pi!');
+                        }
+                      })
+                    });
+                  </script>
+                    <form method="post" class="form" id="gif-form">
+                        <label>
+                            <input type="url" class="form__field" placeholder="Enter gif link..." />
+                        </label>
+                        <button type="button" class="btn btn--primary btn--inside uppercase" id="button2">Submit</button>
+                    </form>
 
+            </div>
+        </div>
 
 
     </body>
