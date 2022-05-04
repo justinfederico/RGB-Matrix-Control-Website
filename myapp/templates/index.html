@@ -2,10 +2,7 @@
 <html lang="en">
 
 <head>
-    <!--- Include Jquery stuff so form can be submitted without reloading page --->
-    <script src="https://code.jquery.com/jquery-3.5.1.js"
-                          integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
-                          crossorigin="anonymous"></script>
+
     <meta charset="UTF-8">
     <title>MQTT PiMatrix</title>
     <!--- Reference correct stylesheet --->
@@ -26,10 +23,13 @@
                         <label>
                             <input type="url" name="image" id="image" placeholder="Enter image link..." />
                         </label>
-                        <button type="submit" class="btn btn--primary btn--inside uppercase" id="button">Submit</button>
+                        <button type="submit" name="button" class="btn btn--primary btn--inside uppercase" id="button">Submit</button>
                     </form>
                 <!--Script for submission without reload -->
-
+                        <!--- Include Jquery stuff so form can be submitted without reloading page --->
+                        <script src="https://code.jquery.com/jquery-3.5.1.js"
+                          integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
+                          crossorigin="anonymous"></script>
                         <script type="text/javascript">
                             $(document).on('submit','#image-form',function(e)
                                            {
@@ -43,35 +43,36 @@
                                 },
                                 success:function()
                                 {
-                                  alert('Submitted to Raspberry Pi!');
+                                  alert('Submitted image to Raspberry Pi!');
+                                  document.getElementById("image-form").reset();
                                 }
                               })
                             });
                           </script>
-                    <form method="post" class="form" id="gif-form">
-                        <label>
-                            <input type="url" name="gif" id="gif" placeholder="Enter gif link..." />
-                        </label>
-                        <button type="button" class="btn btn--primary btn--inside uppercase" id="button2">Submit</button>
-                    </form>
-                    <script type="text/javascript">
-                            $(document).on('submit','#gif-form',function(e)
-                                           {
-                              console.log('Clicked!');
-                              e.preventDefault();
-                              $.ajax({
-                                type:'POST',
-                                url:'/',
-                                data:{
-                                  gif:$("#gif").val()
-                                },
-                                success:function()
-                                {
-                                  alert('Submitted to Raspberry Pi!');
-                                }
-                              })
-                            });
-                          </script>
+<!--                    <form method="post" class="form" id="gif-form">-->
+<!--                        <label>-->
+<!--                            <input type="url" name="gif" id="gif" placeholder="Enter gif link..." />-->
+<!--                        </label>-->
+<!--                        <button type="submit" name="button2" class="btn btn&#45;&#45;primary btn&#45;&#45;inside uppercase" id="button2">Submit</button>-->
+<!--                    </form>-->
+<!--                    <script type="text/javascript">-->
+<!--                            $(document).on('submit','#gif-form',function(e)-->
+<!--                                           {-->
+<!--                              console.log('Clicked!');-->
+<!--                              e.preventDefault();-->
+<!--                              $.ajax({-->
+<!--                                type:'POST',-->
+<!--                                url:'/',-->
+<!--                                data:{-->
+<!--                                  gif:$("#gif").val()-->
+<!--                                },-->
+<!--                                success:function()-->
+<!--                                {-->
+<!--                                  alert('Submitted gif to Raspberry Pi!');-->
+<!--                                }-->
+<!--                              })-->
+<!--                            });-->
+<!--                          </script>-->
             </div>
         </div>
 
