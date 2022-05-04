@@ -2,8 +2,6 @@ from flask import Flask, render_template, request, url_for, redirect
 import paho.mqtt.client as mqtt
 
 app = Flask(__name__)
-topic = '/raspberrypi/matrix/links'
-port = 1883
 
 
 # app.config['MQTT_BROKER_URL'] = 'broker.emqx.io'
@@ -18,17 +16,24 @@ port = 1883
 # # app.config['MQTT_TLS_CA_CERTS'] = 'broker.emqx.io-ca.crt'
 
 
-def on_connect(client, userdata, flags, rc):
-    client.subscribe(topic)
-    print('connected')
-
-
-def on_message(client, userdata, msg):
-    print("message received")
-
-
 @app.route("/", methods=['GET', 'POST'])
 def index():
+    def on_connect(client, userdata, flags, rc):
+        client.subscribe(topic)
+        print('connected')
+
+    def on_message(client, userdata, msg):
+        print("message received")
+    topic = '/raspberrypi/matrix/links'
+    port = 1883
+    client = mqtt.Client()
+    # client.username_pw_set(username, password)
+    client.on_connect = on_connect
+    client.on_message = on_message
+    client.connect('broker.emqx.io', port, 60)
+    client.loop_start()
+
+
     if request.method == "POST":
         image = request.form.get("image")
         control = 0
@@ -42,7 +47,6 @@ def index():
             imagePi = 'G:' + image
             print("gif got")
             client.publish(topic, imagePi)
-
 
     return render_template('index.html')
 
@@ -79,10 +83,5 @@ def index():
 
 
 if __name__ == "__main__":
-    client = mqtt.Client()
-    # client.username_pw_set(username, password)
-    client.on_connect = on_connect
-    client.on_message = on_message
-    client.connect('broker.emqx.io', port, 60)
-    client.loop_start()
+
     app.run(host='0.0.0.0')
