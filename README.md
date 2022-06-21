@@ -5,4 +5,4 @@ This website is coded in Flask, and is meant to send an image or gif link from t
 
 Functional as of 05/03/2022. It will be hosted briefly on my personal deployment testing domain, www.jfed.xyz, for demonstration.
 
-This is the frontend/UI portion of https://github.com/aedlebeck/RPI-RGBMatrix-MQTT, which I collaborated with https://github.com/aedlebeck in creating.
+This is the frontend/UI portion of https://github.com/aedlebeck/RPI-RGBMatrix-MQTT, which I collaborated with https://github.com/aedlebeck in creating. The site only works if it is used in conjunction with his portion of the project.
